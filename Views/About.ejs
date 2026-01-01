@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- header -->
+     <%- include("header.ejs"); %> 
+
+     <div class="titlecard" id="setdisplay">
+        Home  >   About Us
+    </div>
+
+    <section class="about-hero">
+        <div class="about-image">
+    <img src="/assets/images/about-image.jpg" alt="Our Team">
+  </div>
+  <div class="about-content">
+    <h1>Who We Are</h1>
+    <p>We are passionate professionals offering premium-quality handyman services that bring comfort and reliability to your home or business. Our team is built on trust, craftsmanship, and years of experience.</p>
+    <button class="btn-primary">Get Free Quote</button>
+  </div>
+
+    </section>
+
+    <section class="mission-sec">
+  <div class="mission">
+    <h2>Our Mission</h2>
+    <p>To deliver reliable, affordable, and professional handyman solutions that exceed expectations. We value transparency, customer satisfaction, and on-time project delivery.</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="head">
+    <h2>Why choose us</h2>
+  </div>
+  <div class="feature-grid">
+  <div class="feature-card">
+    <i class="fas fa-tools"></i>
+    <h3>Expertise</h3>
+    <p>Skilled in electrical, plumbing, carpentry, and general repairs. We handle it all.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-clock"></i>
+    <h3>On-Time Service</h3>
+    <p>Punctuality is our promise. We respect your time and deliver efficiently.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-thumbs-up"></i>
+    <h3>Customer Satisfaction</h3>
+    <p>Our top priority is your happiness. We don’t stop until you’re satisfied.</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="cta-sec">
+  <h2>Ready to Get Started?</h2>
+  <p>Contact us today and let's transform your home or workspace together.</p>
+  <button class="btn-primary">contact us</button>
+</section>
+
+
+<%- include('footer.ejs'); %>
+        <script src="/js/cartcount.js"></script>
+
+</body>
+</html>

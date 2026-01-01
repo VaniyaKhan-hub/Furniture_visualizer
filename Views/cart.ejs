@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Header Start -->
+    <%- include('header.ejs'); %>
+        <!-- Header End -->
+
+         <div class="titlecard" id="setdisplay">
+        Home  >   Shopping Cart
+    </div>
+
+
+    <div class="cart" id="setdisplay">
+         <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>IMAGE</th>
+                    <th>PRODUCT</th>
+                    <th>PRICE</th>
+                    <th>QUANTITY</th>
+                    <th>SUBTOTAL</th>
+                </tr>
+                
+            </thead>
+            <tbody id="cart-body">
+                    <% if(productrecords !="" ){%>
+                        <% productrecords.forEach((data)=>{%>
+                                <tr>
+                                    <td><a href="/cart/remove/<%= data._id %>" title="Remove item from cart"><i class="fa-solid fa-xmark" style="color: grey;"></i></a></td>
+                                    <td>
+                                        <img src="/assets/<%= data.Image1 %>" class="
+                    m-2" alt="" width="50" height="50">
+                                    </td>
+                                    <td>
+                                        <%= data.Title%>
+                                    </td>
+                                    <td>
+                                        <%= data.Price%>
+                                    </td>
+                                    <% cart_records.forEach((cart)=> { %>
+                                        <% if (data._id==cart.productid) { %>
+                                            <td>
+                                                <input type="number" min="1" class="quantity-input" value="<%= cart.quantity %>" data-productid="<%= data._id %>">
+
+                                                <!-- <input type="number" name="" id="" value="<%= cart.quantity %>"> -->
+                                            </td>
+                                            <td>
+                                                <% let total=cart.quantity * data.Price;%>
+                                                
+                                                    <%= total%>
+                                            </td>
+                                            <% } %>
+                                                <% }) %>
+                                </tr>
+                                <%})%>
+                                    <%} else{%>
+                                        <td colspan="7" class="text-center"> No items in your cart </td>
+
+                                        <% }%>
+            </tbody>
+        </table>
+        <div class="checkout">
+            <p><b>TOTAL :</b> <span>PKR <%= totalAmount %></span></p>
+            <a href="/cart/checkout">
+                <button class="pro">Proceed To Checkout</button>
+            </a>
+        </div>
+         
+    </div>
+        <!-- Footer Start -->
+   <%- include('footer.ejs'); %>
+        <!-- Footer End -->
+
+        <script src="/js/cartcount.js"></script>
+        <script src="/js/cart.js"></script>
+</body>
+
+</html>

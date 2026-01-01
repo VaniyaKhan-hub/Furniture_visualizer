@@ -1,0 +1,226 @@
+const Cart = require('../model/Cart'); // your Cart model
+
+// Add product to cart
+const add = async (req, res) => {
+    const userId = req.session.userid;
+    const productId = req.params.id;
+
+    if (!userId) {
+        // Not authenticated — redirect from frontend, so just send non-JSON
+        return res.status(401).send('Not authenticated');
+    }
+
+    try {
+        const exists = await Cart.findOne({ userId, productId });
+
+        if (exists) {
+            return res.status(200).json({ message: 'Already in cart' });
+        }
+
+        const data = await Cart.create({ userId, productId });
+
+        if (data) {
+            return res.status(201).json({ message: 'Added to cart' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Remove product from cart
+const remove = async (req, res) => {
+    const userId = req.session.userid;
+    const productId = req.params.id;
+
+    if (!userId) {
+        return res.status(401).send('Not authenticated');
+    }
+
+    try {
+        await Cart.findOneAndDelete({ userId, productId });
+        return res.status(200).json({ message: 'Removed from cart' });
+    } catch (err) {
+        return res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+module.exports = { add, remove };
+
+
+
+ Express Router (cartRoutes.js)
+
+const express = require('express');
+const router = express.Router();
+const cartController = require('../Controller/CartController');
+
+router.post('/add/:id', cartController.add);
+router.post('/remove/:id', cartController.remove);
+
+module.exports = router;
+
+
+<p class="cart-toggle" data-product="<%= p._id %>">
+  <a href="/cart/add/<%= p._id %>">
+    <i class="fa fa-cart-plus" style="color: #007bff; cursor: pointer;"></i>
+  </a>
+</p>
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cartToggles = document.querySelectorAll('.cart-toggle');
+
+  cartToggles.forEach(toggle => {
+    toggle.addEventListener('click', async e => {
+      e.preventDefault();
+
+      const icon = toggle.querySelector('i');
+      const productId = toggle.dataset.product;
+
+      const isAdding = icon.classList.contains('fa-cart-plus'); // cart-plus means add
+
+      const action = isAdding ? 'add' : 'remove';
+
+      try {
+        const res = await fetch(`/cart/${action}/${productId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const contentType = res.headers.get('content-type');
+        if (!(contentType && contentType.indexOf('application/json') !== -1)) {
+          // User not authenticated — redirect to login
+          window.location.href = '/auth/login';
+          return;
+        }
+
+        const data = await res.json();
+
+        if (action === 'add') {
+          icon.classList.remove('fa-cart-plus');
+          icon.classList.add('fa-cart-arrow-down'); // indicates item is in cart
+          Swal.fire({
+            icon: data.message === 'Already in cart' ? 'info' : 'success',
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          icon.classList.remove('fa-cart-arrow-down');
+          icon.classList.add('fa-cart-plus');
+          Swal.fire({
+            icon: 'info',
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong!',
+          text: err.message
+        });
+      }
+    });
+  });
+});
+
+
+
+
+
+Same Script for both
+<!-- Wishlist -->
+<p class="action-toggle" data-type="wishlist" data-product="<%= p._id %>">
+  <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
+</p>
+
+<!-- Cart -->
+<p class="action-toggle" data-type="cart" data-product="<%= p._id %>">
+  <i class="fa fa-cart-plus" style="cursor: pointer;"></i>
+</p>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const actionToggles = document.querySelectorAll('.action-toggle');
+
+  actionToggles.forEach(toggle => {
+    toggle.addEventListener('click', async e => {
+      e.preventDefault();
+
+      const icon = toggle.querySelector('i');
+      const productId = toggle.dataset.product;
+      const type = toggle.dataset.type; // 'wishlist' or 'cart'
+
+      let isAdding;
+      let addClass, removeClass;
+
+      // Define logic based on type
+      if (type === 'wishlist') {
+        isAdding = icon.classList.contains('fa-regular');
+        addClass = 'fa-solid';
+        removeClass = 'fa-regular';
+      } else if (type === 'cart') {
+        isAdding = icon.classList.contains('fa-cart-plus');
+        addClass = 'fa-cart-arrow-down';
+        removeClass = 'fa-cart-plus';
+      } else {
+        return;
+      }
+
+      const action = isAdding ? 'add' : 'remove';
+
+      try {
+        const res = await fetch(`/${type}/${action}/${productId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const contentType = res.headers.get('content-type');
+        if (!(contentType && contentType.indexOf('application/json') !== -1)) {
+          window.location.href = '/auth/login';
+          return;
+        }
+
+        const data = await res.json();
+
+        if (isAdding) {
+          icon.classList.remove(removeClass);
+          icon.classList.add(addClass);
+        } else {
+          icon.classList.remove(addClass);
+          icon.classList.add(removeClass);
+        }
+
+        Swal.fire({
+          icon: isAdding
+            ? (data.message.includes('Already') ? 'info' : 'success')
+            : 'info',
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong!',
+          text: err.message
+        });
+      }
+    });
+  });
+});
+</script>
+
+

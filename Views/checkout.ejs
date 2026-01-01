@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <%- include('header.ejs')%>
+        <div id="setdisplay">
+
+            <div class="checkout-page">
+                <div class="personalinfo">
+                    <h3>Delivery Information</h3>
+                    <form action="" method="POST">
+                        <div class="fl">
+
+                            <div class="textt">
+                                <label for="">Name:</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="textt">
+                                <label for="">Email:</label>
+                                <input type="text" name="email" required>
+                            </div>
+
+                        </div>
+                        <div class="fl">
+
+                            <div class="textt">
+                                <label for="">Contact:</label>
+                                <input type="number" name="contact" required>
+                            </div>
+                            <div class="textt">
+                                <label for="">City:</label>
+                                <input type="text" name="city" required>
+                            </div>
+
+                        </div>
+                        <div class="fl">
+
+                            <div class="textt">
+                                <label for="">State:</label>
+                                <input type="text" name="state" required>
+                            </div>
+                            <div class="textt">
+                                <label for="">ZIP:</label>
+                                <input type="number" name="zip" placeholder="90250" required>
+                            </div>
+
+                        </div>
+                        <div class="textt">
+                            <label for="">Address:</label>
+                            <input type="text" name="address" placeholder="Street 123..." required>
+                        </div>
+                          <div class="textt">
+                            <label for="">Payment Method:</label>
+                        </div>
+                        <div class="fl">
+                            <div class="textt">
+                                <input type="radio" name="payment_method" id="online" value="online">
+                                <center>
+                                    <p>Online Payment</p>
+                                </center>
+                            </div>
+                            <div class="textt">
+                                <input type="radio" name="payment_method" id="cash" value="cash">
+                                <center>
+                                    <p>Cash on Delivery</p>
+                                </center>
+                            </div>
+                        </div>
+                        <div id="online-options" style="display: none;">
+                            <div class="textt">
+                                <label for="">Select Online Method:</label>
+                            </div>
+                            <div class="fl">
+                                <div class="textt">
+                                    <input type="radio" name="online_method" value="jazzcash">
+                                    <center>
+                                        <p>Jazz Cash</p>
+                                    </center>
+                                </div>
+                                <div class="textt">
+                                    <input type="radio" name="online_method" value="easypaisa">
+                                    <center>
+                                        <p>Easy Paisa</p>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="view">
+                            <button type="button" class="submit-btn" onclick="checkout()">Checkout</button>
+                        </div>
+                    </form>
+
+                    <!-- Modal -->
+                    <div id="orderModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <i class="fas fa-check-circle" style="color: green; font-size: 50px; margin-bottom: 10px;"></i>
+                            <p>Your order has been placed successfully</p>
+                            <p>Thanks for choosing us </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartsummary">
+                    <h3>Order Summary</h3>
+
+                    <table>
+
+                        <tbody id="check-body">
+                            <% if(productrecords !="" ){%>
+                                <% productrecords.forEach((data)=>{%>
+                                    <tr>
+                                        <td>
+                                            <img src="/assets/<%= data.Image1 %>" class="
+                    m-2" alt="" width="50" height="50">
+                                        </td>
+                                        <td>
+                                            <%= data.Title%>
+                                                <br>
+                                                <%= data.Price%>
+                                        </td>
+                                        <!-- <td>
+                                    </td> -->
+                                        <% cart_records.forEach((cart)=> { %>
+                                            <% if (data._id==cart.productid) { %>
+                                                <td>
+                                                    <%= cart.quantity %>
+                                                </td>
+                                                <td>
+                                                    <% let total=cart.quantity * data.Price;%>
+
+                                                        <%= total%>
+                                                </td>
+                                                <% } %>
+                                                    <% }) %>
+                                    </tr>
+                                    <%})%>
+                                        <%} else{%>
+                                            <td colspan="7" class="text-center"> No items in your cart </td>
+
+                                            <% }%>
+                        </tbody>
+
+                    </table>
+                    <div class="checkout check">
+                        <p><b>TOTAL :</b> <span>PKR <%= totalAmount %></span></p>
+                        <p>Shipping : Free</p>
+                        <a href="">
+                            <button class="pro">CONFIRM ORDER</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('footer.ejs'); %>
+
+        <script src="/js/cartcount.js"></script>
+        <script>
+            function checkout() {
+                var paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+                if (!paymentMethod) {
+                    alert("Please select a payment method.");
+                    return;
+                }
+                if (paymentMethod.value === 'online') {
+                    var onlineMethod = document.querySelector('input[name="online_method"]:checked');
+                    if (!onlineMethod) {
+                        alert("Please select an online payment method.");
+                        return;
+                    }
+                }
+                document.getElementById('orderModal').style.display = 'block';
+            }
+
+            function closeModal() {
+                document.getElementById('orderModal').style.display = 'none';
+            }
+
+            document.getElementById('online').addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('online-options').style.display = 'block';
+                }
+            });
+
+            document.getElementById('cash').addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('online-options').style.display = 'none';
+                }
+            });
+        </script>
+</body>
+
+</html>

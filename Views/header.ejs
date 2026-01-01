@@ -1,0 +1,130 @@
+<section>
+    <div class="header">
+
+        <header id="setdisplay">
+            <ul>
+                <li><a href="">Privacy </a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">FAQs</a></li>
+            </ul>
+            <ul>
+                <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-pinterest-p"></i></a></li>
+            </ul>
+        </header>
+    </div>
+    <nav id="setdisplay">
+        <div class="logo">
+            <img src="/images/roomifycollege_logo2.jpeg" alt="">
+        </div>
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="menu" id="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/wishlist/viewlist"><i class="fa-solid fa-heart"></i></a></li>
+                <!-- <li><a href="/login"><i class="fa-regular fa-user"></i></a></li> -->
+                <li> <a href="/cart" class="cart-icon">
+                        <span class="addcount">0</span>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a></li>
+                <li class="account-dropdown">
+                    <a href="#" id="profileBtn"><i class="fas fa-user-circle"></i></a>
+                    <ul class="dropdown-content">
+                        <li>
+                            <% if(data !=undefined){ %>
+                                Welcome <%= data.Firstname %>
+                                    <% } %>
+                        </li>
+
+                        <% if(data==undefined){ %>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                            <% } %>
+
+                                <% if(data !=undefined){ %>
+
+                                    <% if(data.Is_admin==1){ %>
+                                        <li><a href="/dash">Dashboard</a></li>
+                                        <% } %>
+                                            <li><a href="/auth/logout">Logout</a></li>
+                                            <% } %>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+</section>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const profileBtn = document.getElementById("profileBtn");
+    const dropdown = document.querySelector(".dropdown-content");
+
+    /* Hamburger toggle */
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("active");
+    });
+
+    /* Profile dropdown toggle */
+    profileBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropdown.classList.toggle("show");
+    });
+
+    /* Close dropdown ONLY when clicking outside profile */
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".account-dropdown")) {
+            dropdown.classList.remove("show");
+        }
+    });
+
+});
+
+//     document.addEventListener('DOMContentLoaded', function() {
+//         document.getElementById('hamburger').addEventListener('click', function() {
+//             document.getElementById('menu').classList.toggle('active');
+//         });
+//     });
+
+// document.addEventListener("DOMContentLoaded", () => {
+
+//     const hamburger = document.getElementById("hamburger");
+//     const menu = document.getElementById("menu");
+//     const profileBtn = document.getElementById("profileBtn");
+//     const dropdown = document.querySelector(".dropdown-content");
+
+//     hamburger.addEventListener("click", () => {
+//         menu.classList.toggle("active");
+//     });
+
+//     profileBtn.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         dropdown.classList.toggle("show");
+//     });
+
+//     // Close dropdown when clicking outside
+//     document.addEventListener("click", (e) => {
+//         if (!e.target.closest(".account-dropdown")) {
+//             dropdown.classList.remove("show");
+//         }
+//     });
+
+// });
+
+
+</script>

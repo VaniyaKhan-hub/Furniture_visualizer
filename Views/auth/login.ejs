@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="con-body">
+    <div class="wrapper">
+
+        <div class="image">
+            <img src="/assets/images/login-image.jpg" alt="Login" />
+        </div>
+
+        <div class="container">
+            <div class="login">
+                <h2>Welcome Back</h2>
+            </div>
+            <div class="basee">
+                <form action="/auth/login" method="POST" class="form">
+                    <div class="textt">
+                        <div class="textt">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="textt password-field">
+                            <label>Password:</label>
+
+                            <div class="password-wrapper">
+                                <input type="password" name="password" id="password" required>
+                                <i class="fa-solid fa-eye" id="togglePassword"></i>
+                            </div>
+                        </div>
+
+                        <div class="view">
+                            <button type="submit" class="submit-btn">Login</button>
+                            <p class="register-link">Don't have an account? <a href="/register">Register here</a></p>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const togglePassword = document.getElementById("togglePassword");
+        const password = document.getElementById("password");
+
+        if (togglePassword) {
+            togglePassword.addEventListener("click", () => {
+                const type = password.getAttribute("type") === "password" ? "text" : "password";
+                password.setAttribute("type", type);
+
+                togglePassword.classList.toggle("fa-eye");
+                togglePassword.classList.toggle("fa-eye-slash");
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+/* Responsive styles for Cart Page */
+
+@media (max-width: 768px) {
+    .cart table {
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .cart table th,
+    .cart table td {
+        padding: 8px;
+        min-width: 80px;
+    }
+
+    .cart table th:first-child,
+    .cart table td:first-child {
+        min-width: 40px;
+    }
+
+    .cart table th:nth-child(2),
+    .cart table td:nth-child(2) {
+        min-width: 100px;
+    }
+
+    .checkout {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .pro {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart table th,
+    .cart table td {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .cart table th:nth-child(2),
+    .cart table td:nth-child(2) {
+        min-width: 80px;
+    }
+
+    .titlecard {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .checkout p {
+        font-size: 18px;
+    }
+}
+
+/* Responsive styles for Checkout Page */
+
+@media (max-width: 768px) {
+    .checkout-page {
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+    }
+
+    .personalinfo,
+    .cartsummary {
+        width: 100%;
+    }
+
+    .fl {
+        flex-direction: column;
+    }
+
+    .textt input {
+        width: 100%;
+    }
+
+    .cartsummary table {
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .cartsummary table td {
+        padding: 8px;
+        min-width: 80px;
+    }
+
+    .cartsummary table td:first-child {
+        min-width: 60px;
+    }
+
+    .checkout.check {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .checkout.check .pro {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cartsummary table td {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .personalinfo h3,
+    .cartsummary h3 {
+        font-size: 20px;
+    }
+
+    .checkout.check p {
+        font-size: 16px;
+    }
+}

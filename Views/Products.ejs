@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+
+<body>
+
+    <%- include('header.ejs'); %>
+        <div class="titlecard" id="setdisplay">
+            Home > Products
+        </div>
+        <section id="setdisplay">
+            <div class="Products">
+
+
+                <% products.forEach((p)=>{%>
+
+                    <div class="procards">
+                        <img src="/assets/<%= p.Image1 %>" alt="">
+                        <div class="info">
+
+                            <h2 class="hdng">
+                                <%= p.Title %>
+                            </h2>
+                            <p>PKR - <%= p.Price %>
+                            </p>
+                            <div class="view fbtn">
+                                <button><a href="/details/<%= p._id %>" class="btn w-100">View Details</a></button>
+                                
+                                <button class="add-to-cart-btn" data-product="<%= p._id %>">Add To Cart</button>
+                                <p class="wishlist-toggle" data-product="<%= p._id %>">
+                                    <a href="/wishlist/add/<%= p._id %>">
+                                        <i class="fa-regular fa-heart" style="color: #e60000; cursor: pointer;"></i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% })%>
+
+            </div>
+        </section>
+
+        <%- include('footer.ejs'); %>
+<!-- Wishlist Link -->
+<script src="/js/wishlist.js"></script>
+
+<!-- Add to Cart Link -->
+<script src="/js/addtocart.js"></script>
+
+<!-- CartCount Link -->
+<script src="/js/cartcount.js"></script>
+
+</body>
+
+</html>

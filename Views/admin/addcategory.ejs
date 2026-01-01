@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../admin/assets/images/logo.png">
+    <title>admin dashboard</title>
+    <!-- Custom CSS -->
+    <link href="../admin/dist/css/style.min.css" rel="stylesheet">
+    <!-- This Page CSS -->
+    <link href="../admin/assets/libs/morris.js/morris.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+     
+        <!-- header -->
+        <%- include("./parts/header.ejs"); %>
+       
+        <!-- sidebar -->
+         <%- include("./parts/sidebar.ejs"); %>
+         
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+         <div class="page-wrapper">
+        <section class="dash">
+            <% if (typeof success !=='undefined' && success) { %>
+
+                                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                                        ✅ category added successfully!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <% } %>
+                                        <h2>Add Category</h2>
+                                        <form action="/dash/uploadcategory/" method="post" >
+                                            <div class="md-3 m-2 text-start">
+                                                <label for="" class="form-label">Category
+                                                </label>
+                                                <input type="text" name="Title" id="Title"
+                                                    class="form-control border-secondary border-2 text-dark"
+                                                    placeholder="category">
+                                            </div>
+                                                  
+                                            <div class="md-3 m-2 text-start">
+
+                                                <input type="submit" id="addbtn" class="btn btn-lg w-100"
+                                                    value="Add Category">
+                                            </div>
+                                        </form>
+        </section>
+             </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center text-muted">
+                All Rights Reserved by Roomify
+            </footer>
+         
+    </div>
+    <script>
+                setTimeout(() => {
+                    const alert = document.querySelector('.alert');
+                    if (alert) alert.style.display = 'none';
+                }, 3000);
+            </script>
+    <script src="../admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="../admin/dist/js/app-style-switcher.js"></script>
+    <script src="../admin/dist/js/feather.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../admin/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <!-- themejs -->
+    <!--Menu sidebar -->
+    <script src="../admin/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../admin/dist/js/custom.min.js"></script>
+    <!-- This Page JS -->
+    <!--Morris JavaScript -->
+    <script src="../admin/assets/libs/raphael/raphael.min.js"></script>
+    <script src="../admin/assets/libs/morris.js/morris.min.js"></script>
+    <script src="../admin/dist/js/pages/morris/morris-data.js"></script>
+</body>
+</html>

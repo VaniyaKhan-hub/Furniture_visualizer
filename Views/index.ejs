@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <section>
+
+        <%- include('header.ejs'); %>
+
+    </section>
+
+    <div class="bgimage">
+        <div class="txt">
+            <h1>"Style Your Space, Your Way."</h1>
+            <h1>We make the ordinary, extraordinary. </h1>
+
+        </div>
+    </div>
+    <section id="setdisplay">
+        <div class="base">
+            <div class="text">
+                <h2>Elevate Your Home With Stylish Furniture’s And Decors</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, itaque nam hic tempore, iusto
+                    deleniti excepturi quas quis eos harum repellat ipsam eaque. Rem in aperiam earum. Quasi, officia
+                    cum.</p>
+            </div>
+            <div class="fimages">
+                <img src="/images/bg.jpg" alt="">
+            </div>
+        </div>
+        <div class="base">
+            <div class="fimages">
+                <img src="/images/bg2.jpg" alt="">
+            </div>
+            <div class="text">
+                <p class="red">
+
+                    modern & elegant
+                </p>
+                <h2>Furniture to love Now & Forever</h2>
+                <p>
+
+                    Discover furniture that’s designed to be cherished, evolving with your life and style, making every
+                    moment at home even more special.
+                </p>
+            </div>
+        </div>
+
+        <div id="products">
+            <center>
+                <h2>Our Products</h2>
+            </center>
+            <div class="main">
+                <div class="fcard">
+                    <img src="/images/bed-modern.jpeg" alt="">
+                    <h3 class="hdng">Luxury Beds</h3>
+                    <p>Where comfort meets craftsmanship.</p>
+                </div>
+                <div class="fcard">
+                    <img src="/images/Glitz_Sofa_Motia_Finish.jpg" alt="">
+                    <h3 class="hdng">Lounging Essentials</h3>
+                    <p>Style and comfort for every living room.</p>
+                </div>
+                <div class="fcard">
+                    <img src="/images/left.jpg" alt="">
+                    <h3 class="hdng">Accent Seating</h3>
+                    <p>Add charm and comfort to any corner.</p>
+                </div>
+            </div>
+            <div class="view">
+                <button><a href="/products">View All Products</a></button>
+            </div>
+        </div>
+
+    </section>
+    <%- include('footer.ejs'); %>
+        
+    <script src="/js/cartcount.js"></script>
+
+
+</body>
+
+</html>
