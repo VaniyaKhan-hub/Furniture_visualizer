@@ -19,11 +19,11 @@ app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(session({
-  secret: "mysecret",
-  resave: false,
-  saveUninitialized: false
-}));
+// app.use(session({
+//   secret: "mysecret",
+//   resave: false,
+//   saveUninitialized: false
+// }));
 
 app.use(express.static("public"));
 
