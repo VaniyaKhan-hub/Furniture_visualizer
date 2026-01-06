@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
-const session = require("express-session");
+// const session = require("express-session");
 
 const WebRoutes = require('./Routes/webRoutes');
 const AuthRoutes = require("./Routes/auth");
