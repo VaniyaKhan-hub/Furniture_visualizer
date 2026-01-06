@@ -1,0 +1,1 @@
+Roomify is a full-stack furniture e-commerce web application built with Node.js, Express, and MongoDB. It features an admin panel to manage products, a dynamic homepage displaying products, and user-friendly functionality including wishlist, add to cart, and checkout for a smooth shopping experience.
